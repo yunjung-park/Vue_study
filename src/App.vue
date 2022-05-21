@@ -8,6 +8,15 @@
     <h4 :style="fontColor">{{ name }}</h4>
     <p>{{ price[idx] }}만원</p>
   </div>
+
+  <div>
+    <!-- 
+      //? 클릭 이벤트리스너 : v-on:click == @click 
+      -->
+    <button @click="increase">Plus</button>
+    <button @click="count < 1 ? 0 : count--">Minus</button>
+    <span>clickCount: {{ count }}</span>
+  </div>
 </template>
 
 <script>
@@ -24,7 +33,13 @@ export default {
       fontColor: "color: darkslateblue",
       products: ["가", "나", "다"],
       menus: ["Home", "Products", "About"],
+      count: 0,
     };
+  },
+  methods: {
+    increase() {
+      this.count++;
+    },
   },
   components: {},
 };
