@@ -1,4 +1,11 @@
 <template>
+  <div class="black-bg" v-if="OpenModal == true" @click="OpenModal = false">
+    <div class="white-bg" v-if="OpenModal == true">
+      <h4>상세 페이지</h4>
+      <p>상세 페이지 내용</p>
+    </div>
+  </div>
+
   <nav class="menu">
     <!-- v-for 반복문 -->
     <a v-for="(nav, idx) in menus" :key="idx">{{ nav }}</a>
@@ -17,6 +24,28 @@
     <button @click="count < 1 ? 0 : count--">Minus</button>
     <span>clickCount: {{ count }}</span>
   </div>
+
+  <div>
+    <img src="./assets/image_1.png" alt="image_1" class="img" />
+    <h4 @click="OpenModal = true">{{ products[0] }}</h4>
+    <p>{{ price[0] }}</p>
+    <button @click="신고수[0]++">버튼 1</button>
+    <span> 신고수: {{ 신고수[0] }}</span>
+  </div>
+  <div>
+    <img src="./assets/image_2.png" alt="image_2" class="img" />
+    <h4 @click="OpenModal = true">{{ products[1] }}</h4>
+    <p>{{ price[1] }}</p>
+    <button @click="신고수[1]++">버튼 2</button>
+    <span> 신고수: {{ 신고수[1] }}</span>
+  </div>
+  <div>
+    <img src="./assets/image_3.png" alt="image_3" class="img" />
+    <h4 @click="OpenModal = true">{{ products[2] }}</h4>
+    <p>{{ price[2] }}</p>
+    <button @click="신고수[2]++">버튼 3</button>
+    <span> 신고수: {{ 신고수[2] }}</span>
+  </div>
 </template>
 
 <script>
@@ -34,11 +63,19 @@ export default {
       products: ["가", "나", "다"],
       menus: ["Home", "Products", "About"],
       count: 0,
+      // todo 데이터를 어떻게 만들지 먼저 생각하고나서 뷰를 만들자.
+      신고수: [0, 0, 0],
+      // todo 모달창의 상태 데이터로 저장해두기
+      OpenModal: false,
     };
   },
   methods: {
     increase() {
       this.count++;
+    },
+
+    increase2() {
+      this.신고수++;
     },
   },
   components: {},
@@ -46,6 +83,38 @@ export default {
 </script>
 
 <style>
+.img {
+  width: 500px;
+  margin-top: 40px;
+}
+
+body {
+  margin: 0;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+/* //! 동적 UI 만드는 법 
+    1. UI의 현재 상태를 데이터로 저장해두기
+    2. 데이터에 따라 UI가 어떻게 보일지 작성하기 */
+
+.black-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+}
+
+.white-bg {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
